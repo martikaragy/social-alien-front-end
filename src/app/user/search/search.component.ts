@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserModel} from 'src/app/user/user.model';
 import {Router} from '@angular/router';
-import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-search',
@@ -20,11 +19,9 @@ export class SearchComponent implements OnInit {
     
   }
 
-  navigateToProfilePage(username: string){
-    console.log('navigation active');
-    console.log(username);
-    this.router.navigate(['/users/' + username]);
-  }
+  // navigateToProfilePage(username: string){
+  //   this.router.navigate(['/users/' + username]);
+  // }
 
 
 }

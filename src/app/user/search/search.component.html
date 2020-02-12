@@ -1,7 +1,12 @@
 
 <div>
 <ul *ngFor = "let user of users">
-<li #clickedUser (click) = "navigateToProfilePage(clickedUser.innerText)" >{{user.username}}</li>
-<!-- <li #clickedUser  >{{user.username}}</li> -->
+    <li>
+      <a [routerLink] = "['/users', user.username]">
+          <span>{{user.username}}</span>
+      </a>
+
+    </li>
+<!-- <li #clickedUser (click) = "navigateToProfilePage(clickedUser.innerText)" >{{user.username}}</li> -->
 </ul>
 </div>

@@ -8,7 +8,7 @@ import {UsersService} from './users.service';
 })
 export class UserModel {
    private users: IUser[];
-   private locator = (u:IUser, id: number) => u.id = id;
+   private locator = (u:IUser, username: string) => u.username = username;
 
    constructor(private usersService: UsersService){
     this.usersService.loadUsers().subscribe(data => this.users = data);
@@ -18,8 +18,8 @@ export class UserModel {
     return this.users;
    }
 
-   getUser(id:number): IUser {
-       return this.users.find(u => this.locator(u, id));
+   getUser(username: string): IUser {
+       return this.users.find(u => this.locator(u, username));
    }
 
 }

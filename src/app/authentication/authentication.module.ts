@@ -16,4 +16,4 @@ import { AuthenticationComponent } from './authentication/authentication.compone
   ],
   exports:[LoginComponent, RegisterComponent]
 })
-export class CoreModule { }
+export class AuthenticationModule { }
