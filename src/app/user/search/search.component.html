@@ -1,0 +1,7 @@
+
+<div>
+<ul *ngFor = "let user of users">
+<li #clickedUser (click) = "navigateToProfilePage(clickedUser.innerText)" >{{user.username}}</li>
+<!-- <li #clickedUser  >{{user.username}}</li> -->
+</ul>
+</div>
