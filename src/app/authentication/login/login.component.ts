@@ -18,13 +18,25 @@ export class LoginComponent implements OnInit {
   @Output() providePassword = new EventEmitter<string>();
 
 
-  login(usernameInput: string, passwordInput: string){
-    this.provideUsername.emit(usernameInput);
-    this.providePassword.emit(passwordInput);
-    this.userModel.login(usernameInput, passwordInput).subscribe(
-      () => { this.router.navigate['/']});}
+
+  login(usernameInput: string, passwordInput: string, callback){
 
 
+    // this.provideUsername.emit(usernameInput);
+    // this.providePassword.emit(passwordInput);
+    // this.userModel.login(usernameInput, passwordInput).subscribe(
+    //   () => { this.router.navigate['/']});
+    
+    this.userModel.login(usernameInput, passwordInput)
+    .subscribe(response => {
+      if (response['name']) {
+          this.userModel.changeAuthenticatedStatus(true);
+      } else {
+        this.userModel.changeAuthenticatedStatus(true);
+      }
+      this.router.navigateByUrl('/');  
+    });
+    return false;
 
-
+  }
 }

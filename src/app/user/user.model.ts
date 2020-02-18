@@ -30,8 +30,20 @@ export class UserModel {
        return this.usersService.loadPeopleRequestingFriendship(username);
    }
 
-   login(username: string, password: string): Observable<IUser>{
+   login(username: string, password: string){
        return this.usersService.sendLoginRequest(username,password);
+   }
+
+   logout(){
+       return this.usersService.sendLogoutRequest();
+   }
+
+   isAuthenticated(){
+       return this.usersService.authenticated;
+   }
+
+   changeAuthenticatedStatus(isAuthenticated: boolean){
+       this.usersService.setAuthenticated(isAuthenticated);
    }
 
 
