@@ -1,0 +1,17 @@
+<ngb-accordion #acc="ngbAccordion">
+    <ngb-panel id="toggle-1" title="FRIENDS">
+      <ng-template ngbPanelContent>
+        <div>
+            <ul *ngFor = "let friend of userFriends" class="list-group">
+              <li class="list-group-item">
+                <a [routerLink] = "['/users', friend.username]">
+                    <span>{{friend.username}}</span>
+                </a>
+                  </li>
+             </ul>
+      </div>
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>
+
+

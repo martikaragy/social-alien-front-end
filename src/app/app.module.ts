@@ -7,7 +7,6 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import {CoreModule} from 'src/app/core/core.module';
 import {UserModule} from 'src/app/user/user.module';
 import {PostModule} from 'src/app/post/post.module';
-import {SharedModule } from './shared/shared.module';
 import { AuthenticationModule } from './authentication/authentication.module';
 
 
@@ -19,7 +18,6 @@ import { AuthenticationModule } from './authentication/authentication.module';
   ],
   imports: [
     BrowserModule,
-    SharedModule,
     CoreModule,
     UserModule,
     PostModule,

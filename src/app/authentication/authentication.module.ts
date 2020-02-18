@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap'
-import {RouterModule} from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
+import {AuthenticationRoutingModule} from 'src/app/authentication/authentication-routing.module';
 
 
 @NgModule({
@@ -12,8 +12,8 @@ import { AuthenticationComponent } from './authentication/authentication.compone
   imports: [
     CommonModule,
     NgbModule,
-    RouterModule
+    AuthenticationRoutingModule
   ],
-  exports:[LoginComponent, RegisterComponent]
+  exports:[LoginComponent, RegisterComponent, AuthenticationComponent]
 })
 export class AuthenticationModule { }

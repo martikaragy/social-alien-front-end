@@ -1,21 +1,30 @@
 import { NgModule } from '@angular/core';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { SearchComponent } from './search/search.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import {HttpClientModule} from '@angular/common/http'
-import {UsersService, REST_URL}  from './users.service';
+import {UsersService, URL_USERS, URL_LOGIN}  from './users.service';
 import {UserModel} from 'src/app/user/user.model';
-import { UsersComponent } from './users/users.component';
 import {RouterModule} from '@angular/router';
+import { UserDetailsComponent } from './user-details/user-details.component';
+import { UserFriendsComponent } from './user-friends/user-friends.component';
+import { UserRequestsComponent } from './user-requests/user-requests.component';
 
 @NgModule({
-  declarations: [SearchComponent, ProfilePageComponent, UsersComponent],
+  declarations: [SearchComponent, ProfilePageComponent, UserDetailsComponent, UserFriendsComponent, UserRequestsComponent],
   imports: [
     HttpClientModule,
     RouterModule,
-    CommonModule
+    CommonModule,
+    NgbModule
   ],
-  exports:[SearchComponent, ProfilePageComponent, UsersComponent],
-  providers:[UserModel, UsersService, {provide: REST_URL, useValue: 'http://localhost:4200/api/users'}]
+  exports:[SearchComponent, ProfilePageComponent, UserDetailsComponent, UserFriendsComponent],
+  providers:[
+    UserModel,
+     UsersService,
+      {provide: URL_USERS, useValue: 'http://localhost:4200/api/users'},
+      {provide: URL_LOGIN, useValue: 'http://localhost:4200/api/login'},
+    ]
 })
 export class UserModule { }

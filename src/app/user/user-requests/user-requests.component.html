@@ -1,0 +1,15 @@
+<ngb-accordion #acc="ngbAccordion">
+    <ngb-panel id="toggle-1" title="REQUESTS">
+      <ng-template ngbPanelContent>
+        <div>
+            <ul *ngFor = "let user of usersRequestingFrendship" class="list-group">
+              <li class="list-group-item">
+                <a [routerLink] = "['/users', user.username]">
+                    <span>{{user.username}}</span>
+                </a>
+                  </li>
+             </ul>
+      </div>
+      </ng-template>
+    </ngb-panel>
+  </ngb-accordion>

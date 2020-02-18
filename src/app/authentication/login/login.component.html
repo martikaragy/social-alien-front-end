@@ -1,1 +1,9 @@
-<p>login works!</p>
+<div>
+    <label>username:</label>
+    <input #username type="text">
+    <br>
+    <label>password:</label>
+    <input #password type="text">
+    <br>
+    <button (click) = "login(username.value, password.value)">Log in</button>
+</div>

@@ -1,12 +1,16 @@
 
+<h4>Find users:</h4>
 <div>
-<ul *ngFor = "let user of users">
-    <li>
-      <a [routerLink] = "['/users', user.username]">
-          <span>{{user.username}}</span>
-      </a>
-
-    </li>
-<!-- <li #clickedUser (click) = "navigateToProfilePage(clickedUser.innerText)" >{{user.username}}</li> -->
-</ul>
+  <input #input type="text">
+  <button (click) = "changeFilter(input.value)" class="btn btn-primary">Search</button>
 </div>
+<div>
+    <ul *ngFor = "let user of searchedUsers" class="list-group">
+      <li class="list-group-item">
+        <a [routerLink] = "['/users', user.username]">
+            <span>{{user.username}}</span>
+        </a>
+          </li>
+      </ul>
+</div>
+
