@@ -5,6 +5,7 @@ import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import {AuthenticationRoutingModule} from 'src/app/authentication/authentication-routing.module';
+import {FormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -12,6 +13,7 @@ import {AuthenticationRoutingModule} from 'src/app/authentication/authentication
   imports: [
     CommonModule,
     NgbModule,
+    FormsModule,
     AuthenticationRoutingModule
   ],
   exports:[LoginComponent, RegisterComponent, AuthenticationComponent]

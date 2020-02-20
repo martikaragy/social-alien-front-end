@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { SearchComponent } from './search/search.component';
 import { ProfilePageComponent } from './profile-page/profile-page.component';
 import {HttpClientModule} from '@angular/common/http'
-import {UsersService, URL_USERS, URL_LOGIN, URL_AUTH}  from './users.service';
+import {UsersDataSource, URL_USERS, URL_AUTH}  from './users.datasource';
 import {UserModel} from 'src/app/user/user.model';
 import {RouterModule} from '@angular/router';
 import { UserDetailsComponent } from './user-details/user-details.component';
@@ -22,9 +22,8 @@ import { UserRequestsComponent } from './user-requests/user-requests.component';
   exports:[SearchComponent, ProfilePageComponent, UserDetailsComponent, UserFriendsComponent],
   providers:[
     UserModel,
-     UsersService,
+     UsersDataSource,
       {provide: URL_USERS, useValue: 'http://localhost:4200/api/users'},
-      {provide: URL_LOGIN, useValue: 'http://localhost:4200/api/login'},
       {provide: URL_AUTH, useValue: 'http://localhost:4200/api/user'},
     ]
 })

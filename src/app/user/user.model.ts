@@ -1,6 +1,6 @@
 import { Injectable, OnInit } from "@angular/core";
 import {IUser} from 'src/app/user/user';
-import {UsersService} from './users.service';
+import {UsersDataSource} from './users.datasource';
 import {Observable} from 'rxjs';
 
 
@@ -9,42 +9,52 @@ import {Observable} from 'rxjs';
 })
 export class UserModel {
    
+   authenticated: boolean = false;
+   currentUser: IUser = null;
 
-   constructor(private usersService: UsersService){
+   constructor(private dataSource: UsersDataSource){
 
    }
 
    getUsers(): Observable<IUser[]>{
-    return this.usersService.loadUsers();
+    return this.dataSource.loadUsers();
    }
 
    getUserByUsername(username: string){
-       return this.usersService.loadUserByUsername(username);
+       return this.dataSource
+.loadUserByUsername(username);
    }
 
    getUserFriends(username: string): Observable<IUser[]>{
-    return this.usersService.loadUserFriends(username);
+    return this.dataSource.loadUserFriends(username);
    }
 
    getPeopleRequestingFriendship(username: string): Observable<IUser[]>{
-       return this.usersService.loadPeopleRequestingFriendship(username);
+       return this.dataSource
+.loadPeopleRequestingFriendship(username);
    }
 
-   login(username: string, password: string){
-       return this.usersService.sendLoginRequest(username,password);
+   login(username: string, password: string): Observable<IUser>{
+       return this.dataSource
+.sendLoginRequest(username,password);
    }
 
-   logout(){
-       return this.usersService.sendLogoutRequest();
+   logout(): Observable<IUser>{
+    return this.dataSource
+    .sendLoginRequest("",""); 
    }
 
    isAuthenticated(){
-       return this.usersService.authenticated;
+       return this.authenticated;
    }
 
-   changeAuthenticatedStatus(isAuthenticated: boolean){
-       this.usersService.setAuthenticated(isAuthenticated);
+   setAuthenticated(isAuthenticated: boolean){
+       this.authenticated = isAuthenticated;
    }
+
+   getAuthenticatedUser(){
+    return this.dataSource.sengAuthenticationGetRequest();
+}
 
 
 

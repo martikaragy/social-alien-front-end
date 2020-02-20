@@ -5,21 +5,17 @@ import { Observable } from 'rxjs';
 import {HttpHeaders} from '@angular/common/http';
 
 export const URL_USERS = new InjectionToken("url_users");
-export const URL_LOGIN = new InjectionToken("url_login");
 export const URL_AUTH = new InjectionToken("url_auth");
 
 @Injectable({
     providedIn:'root'
 })
 
-export class UsersService{
-
-    authenticated: boolean = false;
+export class UsersDataSource{
 
     constructor(
         private http:HttpClient, 
         @Inject(URL_USERS) private urlUsers: string,
-        @Inject(URL_LOGIN) private urlLogin: string,
         @Inject(URL_AUTH) private urlAuth: string){ }
 
     loadUsers(): Observable<IUser[]>{
@@ -38,20 +34,16 @@ export class UsersService{
         return this.http.get<IUser[]>(this.urlUsers +'/' + username +  '/connections/requests');
     }
 
-    sendLoginRequest(username: string, password: string) {
+    sendLoginRequest(username: string, password: string): Observable<IUser> {
 
         const headers = new HttpHeaders({username, password}? {
             Authorization : 'Basic ' + btoa(username + ':' + password)} : {});
 
-        return this.http.get(this.urlAuth, {headers: headers});
+        return this.http.get<IUser>(this.urlAuth, {headers: headers});
     }
 
-    sendLogoutRequest(){
-        return this.http.post('logout', {});
-    }
-
-    setAuthenticated(isAuthenticated: boolean){
-        this.authenticated = isAuthenticated;
+    sengAuthenticationGetRequest(){
+        return this.http.get<IUser>(this.urlAuth);
     }
          
 

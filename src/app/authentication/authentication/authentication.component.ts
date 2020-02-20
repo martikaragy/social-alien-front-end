@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IUser } from 'src/app/user/user';
 
 @Component({
   selector: 'app-authentication',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthenticationComponent implements OnInit {
 
-  constructor() { }
+  currentUser: IUser;
+
+  constructor() { 
+
+  }
 
   ngOnInit() {
   }

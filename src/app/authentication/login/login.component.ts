@@ -14,13 +14,13 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  @Output() provideUsername = new EventEmitter<string>();
-  @Output() providePassword = new EventEmitter<string>();
+  // @Output() provideUsername = new EventEmitter<string>();
+  // @Output() providePassword = new EventEmitter<string>();
 
 
 
-  login(usernameInput: string, passwordInput: string, callback){
-
+  login(usernameInput: string, passwordInput: string){
+  console.log('in login:' + usernameInput + ' and ' + passwordInput);
 
     // this.provideUsername.emit(usernameInput);
     // this.providePassword.emit(passwordInput);
@@ -28,15 +28,19 @@ export class LoginComponent implements OnInit {
     //   () => { this.router.navigate['/']});
     
     this.userModel.login(usernameInput, passwordInput)
-    .subscribe(response => {
-      if (response['name']) {
-          this.userModel.changeAuthenticatedStatus(true);
+    .subscribe(user => {
+      if (user) {
+        console.log('has principal');
+          this.userModel.setAuthenticated(true);
+          this.userModel.currentUser = user;
+          this.router.navigateByUrl('/'); 
       } else {
-        this.userModel.changeAuthenticatedStatus(true);
+        console.log('doesnt have principal');
+        this.userModel.setAuthenticated(true);
+        this.router.navigateByUrl('/notfound'); 
       }
-      this.router.navigateByUrl('/');  
     });
-    return false;
+    
 
   }
 }

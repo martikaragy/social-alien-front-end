@@ -1,4 +1,16 @@
-<div>
+<form #loginForm = "ngForm" (ngSubmit)="login(usernameInput.value, passwordInput.value)">
+    <label>Username:</label>
+    <input #usernameInput="ngModel" type="text" ngModel name="username" required >
+    <div *ngIf="usernameInput.invalid && usernameInput.touched">Please provide username! </div>
+    <label>Password:</label>
+    <input #passwordInput="ngModel" type="password" ngModel name="password" >
+    <div *ngIf="passwordInput.invalid && passwordInput.touched">Please provide password! </div>
+    <button class="btn btn-primary" [disabled]="loginForm.invalid">LOGIN</button>
+</form>
+
+
+
+<!-- <div>
     <label>username:</label>
     <input #username type="text">
     <br>
@@ -6,4 +18,5 @@
     <input #password type="text">
     <br>
     <button (click) = "login(username.value, password.value)">Log in</button>
-</div>
+    required pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"
+</div> -->
