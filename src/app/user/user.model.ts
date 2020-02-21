@@ -21,8 +21,11 @@ export class UserModel {
    }
 
    getUserByUsername(username: string){
-       return this.dataSource
-.loadUserByUsername(username);
+       return this.dataSource.loadUserByUsername(username);
+   }
+
+   getUserInfo(username: string): Observable <string[]>{
+       return this.dataSource.loadUserInfo(username);
    }
 
    getUserFriends(username: string): Observable<IUser[]>{
@@ -35,14 +38,9 @@ export class UserModel {
    }
 
    login(username: string, password: string): Observable<IUser>{
-       return this.dataSource
-.sendLoginRequest(username,password);
+       return this.dataSource.sendLoginRequest(username,password);
    }
-//delete
-   loginTest(username: string, password: string){
-    return this.dataSource
-.loginTest(username,password);
-}
+
 
    logout(): Observable<IUser>{
     return this.dataSource
@@ -59,6 +57,10 @@ export class UserModel {
 
    getAuthenticatedUser(){
     return this.dataSource.sengAuthenticationGetRequest();
+    }
+
+    getUsersBySearchTerm(searchTerm: string): Observable<IUser[]>{
+        return this.dataSource.sendSearchUsersRequest(searchTerm);
     }
 
     createUser(firstName: string, lastName: string, email: string, username: string, password: string, repeatPassword:string ){

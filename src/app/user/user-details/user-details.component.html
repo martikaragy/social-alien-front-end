@@ -1,7 +1,8 @@
-<h4>USER INFO:</h4>
-<div>
-    <span>{{user?.username}}</span>
-    <span>{{user?.firstName}}</span>
-    <span>{{user?.lastName}}</span>
-    <span>{{user?.email}}</span>
+<div class="text-center">
+    <h4 class="text-primary list-group">USER INFO</h4>
+    <div>
+        <ul *ngFor = "let info of userInfo" class="list-group">
+        <li class="list-group-item text-muted">{{info}}</li>
+        </ul>
+    </div>
 </div>

@@ -5,10 +5,6 @@
                 <a ngbNavLink routerLink="" >Home</a>
             </li>
             <li ngbNavItem>
-                <a ngbNavLink routerLink="/users/:id">My Profile</a>
-            </li>
-
-            <li ngbNavItem>
                 <a ngbNavLink routerLink="/authentication/login">Login</a>
             </li>
             <li ngbNavItem>
@@ -18,7 +14,7 @@
                 <a ngbNavLink routerLink="/authentication/register">Register</a>
             </li>
             <li ngbNavItem>
-                <a routerLink="" ngbNavLink > AA {{currentUser?.username}}</a>
+                <a *ngIf="currentUser" [routerLink]="['/users', currentUser.username]" ngbNavLink > {{currentUser.username}}</a>
             </li>
         </ul>
     </div>

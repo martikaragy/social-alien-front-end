@@ -23,6 +23,8 @@ export class LoginComponent implements OnInit {
           this.userModel.setAuthenticated(true);
           this.userModel.currentUser = user;
           this.router.navigateByUrl('/'); 
+          console.log('in login component');
+          console.log(user);
       } else {
         this.userModel.setAuthenticated(true);
         this.router.navigateByUrl('/notfound'); 
@@ -31,13 +33,6 @@ export class LoginComponent implements OnInit {
     
 
   }
-//delete
-  loginTest(username: string, password: string){
-    this.userModel.loginTest(username, password)
-    .subscribe(
-      (response: Response) => {
-        response.headers.forEach(header=> console.log(header));})
-  
-  }
+
 
 }

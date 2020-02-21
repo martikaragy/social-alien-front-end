@@ -1,16 +1,18 @@
-
-<h4>Find users:</h4>
-<div>
-  <input #input type="text">
-  <button (click) = "changeFilter(input.value)" class="btn btn-primary">Search</button>
-</div>
-<div>
-    <ul *ngFor = "let user of searchedUsers" class="list-group">
-      <li class="list-group-item">
-        <a [routerLink] = "['/users', user.username]">
-            <span>{{user.username}}</span>
-        </a>
-          </li>
-      </ul>
+<div class="text-center">
+  <h4 class="text-muted" >SEARCH USERS</h4>
+  <div class="form-group">
+    <input #input type="text" class="form-control" placeholder="search term">
+    <br>
+    <button (click) = "searchUsers(input.value)" class="btn btn-primary">GO!</button>
+  </div>
+  <div>
+      <ul *ngFor = "let user of searchedUsers" class="list-group">
+        <li class="list-group-item">
+          <a [routerLink] = "['/users', user.username]">
+              <span>{{user.username}}</span>
+          </a>
+            </li>
+        </ul>
+  </div>
 </div>
 

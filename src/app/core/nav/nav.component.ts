@@ -10,26 +10,25 @@ import { IUser } from 'src/app/user/user';
 })
 export class NavComponent implements OnInit {
 
-  currentUser:IUser;
+  // currentUser:IUser;
 
-
+  get currentUser(){
+    console.log('in get cur user');
+    console.log(this.userModel.currentUser);
+    return this.userModel.currentUser;
+  }
+  
   constructor(private userModel: UserModel, private router: Router) {
-    
-    // this.userModel.login(undefined, undefined).subscribe(requestedUser => {
-    //   if (requestedUser) {
-    //     this.userModel.setAuthenticated (true);
-    //   } else {
-    //     this.userModel.setAuthenticated(false);
-    //   }; this.user = requestedUser; console.log(this.user);
-    // })
+  
   }
 
   ngOnInit() {
-    // this.userModel.getAuthenticatedUser().subscribe(data => {this.currentUser = data; console.log('receive data')});
+    // this.userModel.getAuthenticatedUser().subscribe(data => {this.currentUser = data});
+    // this.currentUser = this.userModel.currentUser;
   }
 
   logout(){
-    this.userModel.logout().subscribe(response => this.router.navigate['/']);
+    this.userModel.logout().subscribe(this.router.navigate['/'], this.userModel.currentUser = null);
   }
 
 }
