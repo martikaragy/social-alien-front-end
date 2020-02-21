@@ -61,7 +61,6 @@ export class UsersDataSource{
     }
 
     sendPostUserRequest(firstName: string, lastName: string, email: string, username: string, password: string, passwordConfirmation:string ){
-        console.log('in datasource');
         var newUser = {username, password, passwordConfirmation, firstName, lastName, email}
         return this.http.post(this.urlUsers,newUser);
     }

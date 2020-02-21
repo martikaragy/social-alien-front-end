@@ -1,9 +1,14 @@
-<form #loginForm = "ngForm" (ngSubmit)="login(usernameInput.value, passwordInput.value)">
-    <label>Username:</label>
-    <input #usernameInput="ngModel" type="text" ngModel name="username" required >
-    <div *ngIf="usernameInput.invalid && usernameInput.touched">Please provide username! </div>
-    <label>Password:</label>
-    <input #passwordInput="ngModel" type="password" ngModel name="password" >
-    <div *ngIf="passwordInput.invalid && passwordInput.touched">Please provide password! </div>
-    <button class="btn btn-primary" [disabled]="loginForm.invalid">LOGIN</button>
-</form>
+<div class="text-center">
+    <h1 class="text-primary">LOGIN</h1>
+    <form #loginForm = "ngForm" (ngSubmit)="login(usernameInput.value, passwordInput.value)">
+        <div class="form-group">
+            <input #usernameInput="ngModel" type="text" ngModel name="username" placeholder="Username" required class="form-control">
+            <div *ngIf="usernameInput.invalid && usernameInput.touched">Please provide username! </div>
+        </div>
+        <div class="form-group">
+            <input #passwordInput="ngModel" type="password" ngModel name="password" placeholder="Password" required class="form-control">
+            <div *ngIf="passwordInput.invalid && passwordInput.touched">Please provide password! </div>
+        </div>
+        <button class="btn btn-primary" [disabled]="loginForm.invalid">LOGIN</button>
+    </form>
+</div>
