@@ -8,8 +8,9 @@ import {CoreModule} from 'src/app/core/core.module';
 import {UserModule} from 'src/app/user/user.module';
 import {PostModule} from 'src/app/post/post.module';
 import { AuthenticationModule } from './authentication/authentication.module';
-// import {XhrInterceptor} from './xhr.interceptor';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {HttpXsrfInterceptor} from './xsrf.interceptor';
+import {HttpClientXsrfModule, HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -20,13 +21,16 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
+    HttpClientXsrfModule.withOptions({headerName: 'X-CSRF'}),
     CoreModule,
     UserModule,
     PostModule,
     AuthenticationModule,
     AppRoutingModule,
   ],
-  // providers: [{ provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true }],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: HttpXsrfInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -20,7 +20,6 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(){
      this.userModel.getUsers().subscribe(data => this.allUsers = data);
-
   }
 
   changeFilter(userFilter: string){
@@ -36,6 +35,8 @@ export class SearchComponent implements OnInit {
     u.lastName === this.filter || 
     u.email.slice(0,u.email.indexOf('@')).includes(this.filter)) ;
 }
+
+//(response: Response) => response.headers.forEach(header=> console.log(header.toString))
 
 
 

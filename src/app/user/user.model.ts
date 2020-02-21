@@ -38,6 +38,11 @@ export class UserModel {
        return this.dataSource
 .sendLoginRequest(username,password);
    }
+//delete
+   loginTest(username: string, password: string){
+    return this.dataSource
+.loginTest(username,password);
+}
 
    logout(): Observable<IUser>{
     return this.dataSource
@@ -54,7 +59,12 @@ export class UserModel {
 
    getAuthenticatedUser(){
     return this.dataSource.sengAuthenticationGetRequest();
-}
+    }
+
+    createUser(firstName: string, lastName: string, email: string, username: string, password: string, repeatPassword:string ){
+        console.log('in usermodel');
+       return this.dataSource.sendPostUserRequest(firstName,lastName,email,username,password,repeatPassword);
+    }
 
 
 

@@ -1,1 +1,34 @@
-<p>register works!</p>
+<form #loginForm = "ngForm" (ngSubmit)="register(firstNameInput.value, lastNameInput.value, emailInput.value, usernameInput.value, passwordInput.value, repeatPasswordInput.value)">
+    <label>First name:</label>
+    <input #firstNameInput="ngModel" type="text" ngModel name="firstName" maxlength="50" >
+    <div *ngIf="firstNameInput.errors?.maxlength?.actualLength > 50  && firstNameInput.touched">You can't enter more than 20 characters for first name.</div>
+    <br>
+    <label>Last name:</label>
+    <input #lastNameInput="ngModel" type="text" ngModel name="lastName" maxlength="50">
+    <div *ngIf="lastNameInput.errors?.maxlength?.actualLength > 50  && lastNameInput.touched">You can't enter more than 20 characters for last name.</div>
+    <br>
+    <label>Email:</label>
+    <input #emailInput="ngModel" type="text" ngModel name="email" email>
+    <div *ngIf="emailInput.invalid && emailInput.touched">Please provide a valid email.</div>
+    <br>
+    <label>Username:</label>
+    <input #usernameInput="ngModel" type="text" ngModel name="username" required maxlength="50">
+    <div *ngIf="usernameInput.invalid.required && usernameInput.touched">Please provide username.</div>
+    <div *ngIf="usernameInput.errors?.maxlength?.actualLength > 50  && usernameInput.touched">You can't enter more than 20 characters for username.</div>
+    <br>
+    <div #passwordsGroup="ngModelGroup" ngModelGroup="passwords" appPasswordMatch>
+        <label>Password:</label>
+        <input #passwordInput="ngModel" type="password" ngModel name="password" required >
+        <div>The password should have minimum 8 characters, one lowercase letter, one uppercase letter, one number, and one symbol, at least. </div>
+        <div *ngIf="passwordInput.invalid.required && passwordInput.touched">Please provide password.</div>
+        <!-- <div *ngIf="passwordInput.errors?.pattern && passwordInput.touched">Please provide password.</div> -->
+        <br>
+        <label>Repeat password:</label>
+        <input #repeatPasswordInput="ngModel" type="password" ngModel name="repeatPassword" >
+        <div *ngIf="repeatPasswordInput.errors?.required && repeatPasswordInput.touched">Please repeat password.</div>
+        <div *ngIf="passwordsGroup?.errors?.passwordMatch">Passwords don't match.</div>
+    </div>
+    <br>
+    <button class="btn btn-primary" [disabled]="loginForm.invalid">REGISTER</button>
+</form>
+<!-- pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})" -->

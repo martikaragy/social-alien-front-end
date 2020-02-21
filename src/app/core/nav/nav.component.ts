@@ -25,7 +25,7 @@ export class NavComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userModel.getAuthenticatedUser().subscribe(data => {this.currentUser = data; console.log('receive data')});
+    // this.userModel.getAuthenticatedUser().subscribe(data => {this.currentUser = data; console.log('receive data')});
   }
 
   logout(){

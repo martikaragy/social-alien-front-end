@@ -14,28 +14,16 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  // @Output() provideUsername = new EventEmitter<string>();
-  // @Output() providePassword = new EventEmitter<string>();
-
-
-
   login(usernameInput: string, passwordInput: string){
-  console.log('in login:' + usernameInput + ' and ' + passwordInput);
 
-    // this.provideUsername.emit(usernameInput);
-    // this.providePassword.emit(passwordInput);
-    // this.userModel.login(usernameInput, passwordInput).subscribe(
-    //   () => { this.router.navigate['/']});
-    
+  
     this.userModel.login(usernameInput, passwordInput)
     .subscribe(user => {
       if (user) {
-        console.log('has principal');
           this.userModel.setAuthenticated(true);
           this.userModel.currentUser = user;
           this.router.navigateByUrl('/'); 
       } else {
-        console.log('doesnt have principal');
         this.userModel.setAuthenticated(true);
         this.router.navigateByUrl('/notfound'); 
       }
@@ -43,4 +31,13 @@ export class LoginComponent implements OnInit {
     
 
   }
+//delete
+  loginTest(username: string, password: string){
+    this.userModel.loginTest(username, password)
+    .subscribe(
+      (response: Response) => {
+        response.headers.forEach(header=> console.log(header));})
+  
+  }
+
 }

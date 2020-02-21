@@ -7,16 +7,3 @@
     <div *ngIf="passwordInput.invalid && passwordInput.touched">Please provide password! </div>
     <button class="btn btn-primary" [disabled]="loginForm.invalid">LOGIN</button>
 </form>
-
-
-
-<!-- <div>
-    <label>username:</label>
-    <input #username type="text">
-    <br>
-    <label>password:</label>
-    <input #password type="text">
-    <br>
-    <button (click) = "login(username.value, password.value)">Log in</button>
-    required pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})"
-</div> -->
