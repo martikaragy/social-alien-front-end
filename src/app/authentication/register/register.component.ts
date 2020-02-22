@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit {
   }
 
   register(firstName: string, lastName: string, email: string, username: string, password: string, repeatPassword:string ){
-    this.userModel.createUser(firstName, lastName, email, username, password, repeatPassword).subscribe(this.router.navigate['/']);
+    this.userModel.createUser(firstName, lastName, email, username, password, repeatPassword).subscribe(()=>this.router.navigate['']);
   }
 
 }

@@ -63,8 +63,7 @@ export class UserModel {
         return this.dataSource.sendSearchUsersRequest(searchTerm);
     }
 
-    createUser(firstName: string, lastName: string, email: string, username: string, password: string, repeatPassword:string ){
-        console.log('in usermodel');
+    createUser(firstName: string, lastName: string, email: string, username: string, password: string, repeatPassword:string ): Observable<IUser>{
        return this.dataSource.sendPostUserRequest(firstName,lastName,email,username,password,repeatPassword);
     }
 

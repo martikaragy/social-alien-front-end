@@ -14,7 +14,7 @@
                 <a ngbNavLink routerLink="/authentication/register">Register</a>
             </li>
             <li ngbNavItem>
-                <a *ngIf="currentUser" [routerLink]="['/users', currentUser.username]" ngbNavLink > {{currentUser.username}}</a>
+                <a *ngIf="currentUser" [routerLink]="['/users', currentUser.username, 'edit']" ngbNavLink > {{currentUser.username}}</a>
             </li>
         </ul>
     </div>

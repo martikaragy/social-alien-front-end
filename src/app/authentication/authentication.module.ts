@@ -6,10 +6,11 @@ import {RegisterComponent} from './register/register.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import {AuthenticationRoutingModule} from 'src/app/authentication/authentication-routing.module';
 import {FormsModule} from '@angular/forms';
+import {PasswordMatchDirective} from './password-match.directive';
 
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, AuthenticationComponent],
+  declarations: [LoginComponent, RegisterComponent, AuthenticationComponent, PasswordMatchDirective],
   imports: [
     CommonModule,
     NgbModule,

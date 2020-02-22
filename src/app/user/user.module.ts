@@ -10,9 +10,10 @@ import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserFriendsComponent } from './user-friends/user-friends.component';
 import { UserRequestsComponent } from './user-requests/user-requests.component';
 import {PostModule} from 'src/app/post/post.module';
+import { EditComponent } from './edit/edit.component';
 
 @NgModule({
-  declarations: [SearchComponent, ProfilePageComponent, UserDetailsComponent, UserFriendsComponent, UserRequestsComponent],
+  declarations: [SearchComponent, ProfilePageComponent, UserDetailsComponent, UserFriendsComponent, UserRequestsComponent, EditComponent],
   imports: [
     RouterModule,
     CommonModule,

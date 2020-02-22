@@ -17,7 +17,7 @@ import {HttpClientXsrfModule, HttpClientModule} from '@angular/common/http';
   declarations: [
     AppComponent,
     HomeComponent,
-    PageNotFoundComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

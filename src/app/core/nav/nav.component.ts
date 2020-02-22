@@ -10,11 +10,7 @@ import { IUser } from 'src/app/user/user';
 })
 export class NavComponent implements OnInit {
 
-  // currentUser:IUser;
-
   get currentUser(){
-    console.log('in get cur user');
-    console.log(this.userModel.currentUser);
     return this.userModel.currentUser;
   }
   
@@ -23,8 +19,7 @@ export class NavComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.userModel.getAuthenticatedUser().subscribe(data => {this.currentUser = data});
-    // this.currentUser = this.userModel.currentUser;
+     this.userModel.getAuthenticatedUser().subscribe();
   }
 
   logout(){

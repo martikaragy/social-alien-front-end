@@ -23,8 +23,6 @@ export class LoginComponent implements OnInit {
           this.userModel.setAuthenticated(true);
           this.userModel.currentUser = user;
           this.router.navigateByUrl('/'); 
-          console.log('in login component');
-          console.log(user);
       } else {
         this.userModel.setAuthenticated(true);
         this.router.navigateByUrl('/notfound'); 
