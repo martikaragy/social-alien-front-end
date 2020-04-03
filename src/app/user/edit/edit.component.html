@@ -1,3 +1,39 @@
-<div class="text-center">
-    <h2 class="text-primary">EDIT PROFILE</h2>
-</div>
+
+<div class="container">
+  <h1 class="text-primary">PROFILE PAGE</h1>
+  <div class="row">
+      <div class="col">
+        <app-user-requests></app-user-requests>
+      </div>
+      <div class="col">
+         <div id="message" *ngIf ="message">{{message}}</div>
+         <form [formGroup]="editProfileForm" (ngSubmit)="updateUser(editProfileForm.get('firstName').value, editProfileForm.get('lastName').value, editProfileForm.get('email').value)">
+             <div class="form-group">
+                <label>First Name:
+                  <input class="form-control" placeholder="First name" formControlName="firstName">
+               </label>
+                <div *ngIf="editProfileForm.get('firstName').invalid && editProfileForm.get('firstName').touched">
+                   The entered value must have {{editProfileForm.get('firstName').errors.maxLength.requiredLength}} characters at most.
+               </div>
+             </div>
+             <div class="form-group">
+                <label>Last name:
+                  <input class="form-control" placeholder="Last name" formControlName="lastName">
+               </label>
+                <div *ngIf="editProfileForm.get('lastName').invalid && editProfileForm.get('lastName').touched">
+                  The entered value must have {{editProfileForm.get('lastName').errors.maxLength.requiredLength}} characters at most.
+              </div>
+             </div>
+             <div class="form-group">
+                <label>Email:
+                  <input class="form-control" placeholder="Email" formControlName="email">
+               </label>
+                <div *ngIf="editProfileForm.get('email').invalid && editProfileForm.get('email').touched">
+                  Please enter a valid email address.
+              </div>
+             </div>
+             <button class="btn btn-primary" [disabled]="editProfileForm.invalid">UPDATE</button>
+         </form>
+      </div>
+  </div>
+</div> 

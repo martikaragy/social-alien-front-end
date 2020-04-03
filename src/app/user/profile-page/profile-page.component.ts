@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding, Input } from '@angular/core';
+import { IUser } from '../user';
+import {ActivatedRoute} from '@angular/router';
+import {mergeMap} from 'rxjs/operators';
+import { UserModel } from '../user.model';
 
 @Component({
   selector: 'app-profile-page',
@@ -7,10 +11,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfilePageComponent implements OnInit {
 
-  constructor(){}
+ selectedUser:IUser;
 
-  ngOnInit(){
-    
-  }
+ constructor(private userModel:UserModel){}
+
+ ngOnInit(){
+   this.selectedUser = (<IUser> this.userModel.displayedUser);
+ }
+
+  
 
 }

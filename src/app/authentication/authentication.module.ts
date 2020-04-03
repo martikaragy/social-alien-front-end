@@ -5,18 +5,19 @@ import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
 import { AuthenticationComponent } from './authentication/authentication.component';
 import {AuthenticationRoutingModule} from 'src/app/authentication/authentication-routing.module';
-import {FormsModule} from '@angular/forms';
-import {PasswordMatchDirective} from './password-match.directive';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import {URL} from './login/login.component';
 
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, AuthenticationComponent, PasswordMatchDirective],
+  declarations: [LoginComponent, RegisterComponent, AuthenticationComponent],
   imports: [
     CommonModule,
     NgbModule,
-    FormsModule,
+    ReactiveFormsModule,
     AuthenticationRoutingModule
   ],
-  exports:[LoginComponent, RegisterComponent, AuthenticationComponent]
+  exports:[LoginComponent, RegisterComponent, AuthenticationComponent],
+  providers:[ {provide: URL, useValue: 'http://localhost:4200/api/user'}]
 })
 export class AuthenticationModule { }

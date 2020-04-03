@@ -1,6 +1,6 @@
 import { TestBed, async, inject } from '@angular/core/testing';
 
-import { UserDetailsGuard } from './user-details.guard';
+import { UserDetailsGuard } from './user/user-details.guard';
 
 describe('UserDetailsGuard', () => {
   beforeEach(() => {

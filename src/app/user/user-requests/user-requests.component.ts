@@ -11,12 +11,13 @@ import {ActivatedRoute} from '@angular/router';
 export class UserRequestsComponent implements OnInit {
 
   usersRequestingFrendship: IUser[];
+  username: string;
 
   constructor(private userModel: UserModel, private route: ActivatedRoute) { }
 
   ngOnInit() {
 
-    let username = this.route.snapshot.params['username'];
+    let username = this.userModel.displayedUser.username;
     this.userModel.getPeopleRequestingFriendship(username).subscribe(data => this.usersRequestingFrendship = data);
   }
 

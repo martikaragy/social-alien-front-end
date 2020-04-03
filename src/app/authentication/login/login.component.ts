@@ -1,6 +1,9 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, InjectionToken, Inject } from '@angular/core';
 import { UserModel } from 'src/app/user/user.model';
 import {Router} from '@angular/router';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+
+export const URL = new InjectionToken("url");
 
 @Component({
   selector: 'app-login',
@@ -9,7 +12,19 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private userModel: UserModel, private router: Router) { }
+  loginForm:FormGroup;
+  errorMessage: string;
+
+  constructor(private userModel: UserModel, private router: Router, @Inject(URL) private urlAuth: string, private fb:FormBuilder) {
+    
+     this.loginForm = fb.group({
+        usernameControl:["",Validators.compose([Validators.required, Validators.minLength(3)])],
+        passwordControl:["", Validators.compose([Validators.required, Validators.minLength(3)])]
+     })
+
+     console.log(this.loginForm);
+
+  }
 
   ngOnInit() {
   }
@@ -20,14 +35,20 @@ export class LoginComponent implements OnInit {
     this.userModel.login(usernameInput, passwordInput)
     .subscribe(user => {
       if (user) {
-          this.userModel.setAuthenticated(true);
           this.userModel.currentUser = user;
           this.router.navigateByUrl('/'); 
-      } else {
-        this.userModel.setAuthenticated(true);
-        this.router.navigateByUrl('/notfound'); 
       }
-    });
+    },
+    (error: Error) => {
+      if(error.message === "Http failure response for " + this.urlAuth + ": 401 Unauthorized"){
+        this.errorMessage = 'Cannot find user with such username or password!'; 
+      }else{
+        this.errorMessage = "Some kind of error happend.";
+      }
+    }
+    
+    
+    );
     
 
   }

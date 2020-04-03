@@ -11,18 +11,25 @@ import { UserFriendsComponent } from './user-friends/user-friends.component';
 import { UserRequestsComponent } from './user-requests/user-requests.component';
 import {PostModule} from 'src/app/post/post.module';
 import { EditComponent } from './edit/edit.component';
+import { UserComponent } from './user/user.component';
+import { UserRoutingModule } from './user-routing.module';
+import { ProfilePageResolver } from './profile-page/profilePage.resolver';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [SearchComponent, ProfilePageComponent, UserDetailsComponent, UserFriendsComponent, UserRequestsComponent, EditComponent],
+  declarations: [SearchComponent, ProfilePageComponent, UserDetailsComponent, UserFriendsComponent, UserRequestsComponent, EditComponent, UserComponent],
   imports: [
     RouterModule,
     CommonModule,
     NgbModule,
-    PostModule
+    PostModule,
+    UserRoutingModule,
+    ReactiveFormsModule
   ],
-  exports:[SearchComponent, ProfilePageComponent, UserDetailsComponent, UserFriendsComponent],
+  exports:[SearchComponent, ProfilePageComponent, UserDetailsComponent, UserFriendsComponent, UserComponent, EditComponent],
   providers:[
     UserModel,
+    ProfilePageResolver,
      UsersDataSource,
       {provide: URL_USERS, useValue: 'http://localhost:4200/api/users'},
       {provide: URL_AUTHENTICATE, useValue: 'http://localhost:4200/api/user'},

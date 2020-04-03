@@ -1,8 +1,9 @@
 import {Injectable, Inject, InjectionToken} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpResponse, HttpErrorResponse} from '@angular/common/http';
 import {IUser} from 'src/app/user/user';
 import { Observable } from 'rxjs';
 import {HttpHeaders} from '@angular/common/http';
+import { catchError } from 'rxjs/operators'; 
 
 export const URL_USERS = new InjectionToken("url_users");
 export const URL_AUTHENTICATE = new InjectionToken("url_authenticate");
@@ -50,8 +51,12 @@ export class UsersDataSource{
         return this.http.get<IUser>(this.urlAuth, {headers: headers});
     }
 
-    sendLogoutRequest(){
-        return this.http.post(this.urlLogout,{});
+
+    sendLogoutRequest(username: string, password: string): Observable<IUser>{
+        const headers = new HttpHeaders({username, password}? {
+            Authorization : 'Basic ' + btoa(username + ':' + password)} : {});
+
+        return this.http.get<any>(this.urlAuth, {headers: headers});
     }
 
     sengAuthenticationGetRequest(){
@@ -65,6 +70,12 @@ export class UsersDataSource{
     sendPostUserRequest(firstName: string, lastName: string, email: string, username: string, password: string, passwordConfirmation:string ): Observable<IUser>{
         var newUser = {username, password, passwordConfirmation, firstName, lastName, email}
         return this.http.post<IUser>(this.urlUsers,newUser);
+    }
+
+    sendUpdateUserRequest(username: string, firstName: string, lastName: string, email: string):Observable<IUser>{
+        var newUser = {firstName, lastName, email}
+        return this.http.put<IUser>(this.urlUsers + "/" + username + "/update",newUser);
+
     }
          
 

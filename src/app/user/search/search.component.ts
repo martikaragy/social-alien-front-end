@@ -1,33 +1,34 @@
-import { Component, Output, EventEmitter, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, OnInit, OnDestroy } from '@angular/core';
 import {UserModel} from 'src/app/user/user.model';
 import {Router} from '@angular/router';
 import {IUser} from 'src/app/user/user';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnDestroy {
 
   searchedUsers:IUser[] = new Array<IUser>();
-
-  // @Output() setFilter = new EventEmitter<string>();
-  // filter: string = '';
+  subscription: Subscription;
 
   constructor(private userModel: UserModel, private router: Router) {}
 
   ngOnInit(){
   }
 
-  searchUsers(searchTerm: string){
-    this.userModel.getUsersBySearchTerm(searchTerm).subscribe(data => this.searchedUsers=data);
+  ngOnDestroy(){
+    if(this.subscription){
+      this.subscription.unsubscribe();
+    }
   }
 
-  // changeFilter(userFilter: string){
-  //   this.setFilter.emit(userFilter);
-  //   this.filter = userFilter;
-  //     }
+  searchUsers(searchTerm: string){
+    this.subscription = this.userModel.getUsersBySearchTerm(searchTerm).subscribe(data => {this.searchedUsers=data});
+  }
+
 
 
 

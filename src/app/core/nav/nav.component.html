@@ -5,13 +5,13 @@
                 <a ngbNavLink routerLink="" >Home</a>
             </li>
             <li ngbNavItem>
-                <a ngbNavLink routerLink="/authentication/login">Login</a>
+                <a *ngIf= "!currentUser" ngbNavLink routerLink="/authentication/login">Login</a>
             </li>
             <li ngbNavItem>
                 <a ngbNavLink (click)="logout()">Logout</a>
             </li>
             <li ngbNavItem>
-                <a ngbNavLink routerLink="/authentication/register">Register</a>
+                <a *ngIf= "!currentUser" ngbNavLink routerLink="/authentication/register">Register</a>
             </li>
             <li ngbNavItem>
                 <a *ngIf="currentUser" [routerLink]="['/users', currentUser.username, 'edit']" ngbNavLink > {{currentUser.username}}</a>

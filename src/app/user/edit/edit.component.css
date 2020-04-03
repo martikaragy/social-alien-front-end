@@ -1,0 +1,9 @@
+input.ng-touched.ng-invalid { border: 2px solid rgb(247, 64, 51) }
+ 
+input.ng-dirty.ng-valid { border: 2px solid #3ca7ee }
+
+ul{list-style-type:none}
+
+li, label{color:rgb(119, 119, 119)}
+
+div #message{color:rgb(119, 119, 119)}

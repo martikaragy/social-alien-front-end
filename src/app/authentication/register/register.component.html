@@ -1,37 +1,105 @@
 <div class="text-center">
-<h1 class="text-primary">REGISTER</h1>
-<form #loginForm = "ngForm" (ngSubmit)="register(firstNameInput.value, lastNameInput.value, emailInput.value, usernameInput.value, passwordInput.value, repeatPasswordInput.value)">
-    <div class="form-group">
-        <input #firstNameInput="ngModel" type="text" ngModel name="firstName" placeholder ="First name" maxlength="50" class="form-control">
-        <div *ngIf="firstNameInput.errors?.maxlength?.actualLength > 50  && firstNameInput.touched">You can't enter more than 20 characters for first name.</div>
+    <h1 class="text-primary">REGISTRATION</h1>
+    <form novalidate [formGroup]="registerForm"  (ngSubmit)="register(registerForm.get('firstName').value, registerForm.get('lastName').value, registerForm.get('email').value, registerForm.get('username').value, registerForm.get('password').value, registerForm.get('repeatPassword').value)">
+        <div class="form-group">
+            <input class="form-control" formControlName="username" placeholder ="Username*" required >
+            <div *ngIf="registerForm.get('username').errors && registerForm.get('username').touched">
+                <ul *ngFor="let message of getValidationMessages(registerForm, 'username')">
+                    <li>{{message}}</li>
+                </ul>
+            </div>
+        </div> 
+        <div class="form-group">
+            <div id="passwordInfo">
+                *The password should have minimum 8 characters, one lowercase letter, one uppercase letter, one number, and one symbol, at least. 
+            </div>
+            <input class="form-control" type="password" formControlName="password" placeholder ="Password*" required>
+            <div *ngIf="registerForm.get('password').errors && registerForm.get('password').touched">
+                <ul *ngFor="let message of getValidationMessages(registerForm, 'password')">
+                    <li>{{message}}</li>
+                </ul>
+            </div>
         </div>
-    <div class="form-group">
-        <input #lastNameInput="ngModel" type="text" ngModel name="lastName" placeholder ="Last name" maxlength="50" class="form-control">
-        <div *ngIf="lastNameInput.errors?.maxlength?.actualLength > 50  && lastNameInput.touched">You can't enter more than 20 characters for last name.</div>
+        <div class="form-group">
+            <input class="form-control" type="password" formControlName="repeatPassword" placeholder ="Repeat password*" required >
+            <div *ngIf="registerForm.get('repeatPassword').errors && registerForm.get('repeatPassword').touched">
+                <ul *ngFor="let message of getValidationMessages(registerForm, 'repeatPassword')">
+                    <li>{{message}}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="form-group" >
+            <input  class="form-control" formControlName="email" placeholder ="Email*" required email>
+            <div *ngIf="registerForm.get('email').errors && registerForm.get('email').touched">
+                <ul *ngFor="let message of getValidationMessages(registerForm, 'email')">
+                    <li>{{message}}</li>
+                </ul>
+            </div>
+        </div> 
+        <div class="form-group">
+            <input class="form-control" formControlName="firstName" placeholder ="First name" >
+            <div *ngIf="registerForm.get('firstName').errors && registerForm.get('firstName').touched">
+                <ul *ngFor="let message of getValidationMessages(registerForm, 'firstName')">
+                    <li>{{message}}</li>
+                </ul>
+            </div>
+        </div> 
+        <div class="form-group">
+            <input class="form-control" formControlName="lastName" placeholder ="Last name"  >
+            <div *ngIf="registerForm.get('lastName').errors && registerForm.get('lastName').touched">
+                <ul *ngFor="let message of getValidationMessages(registerForm, 'lastName')">
+                    <li>{{message}}</li>
+                </ul>
+            </div>
+        </div> 
+        <button class="btn btn-primary" [disabled]="registerForm.invalid">REGISTER</button>
+    </form>
     </div>
-    <div class="form-group" >
-        <input #emailInput="ngModel" type="text" ngModel name="email" placeholder ="Email*" required email class="form-control">
-        <div *ngIf="emailInput.invalid && emailInput.touched">Please provide a valid email.</div>
-    </div>
-    <div class="form-group">
-        <input #usernameInput="ngModel" type="text" ngModel name="username" placeholder ="Username*" required maxlength="50" class="form-control">
-        <div *ngIf="usernameInput.invalid.required && usernameInput.touched">Please provide username.</div>
-        <div *ngIf="usernameInput.errors?.maxlength?.actualLength > 50  && usernameInput.touched">You can't enter more than 20 characters for username.</div>
-    </div>
-    <div #passwordsGroup="ngModelGroup" ngModelGroup="passwords" appPasswordMatch class="form-group">
-        
-            <input #passwordInput="ngModel" type="password" ngModel name="password" placeholder ="Password*" required pattern = "^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$" class="form-control">
-            <div style="font-size: small;">*The password should have minimum 8 characters, one lowercase letter, one uppercase letter, one number, and one symbol, at least. </div>
-            <div *ngIf="passwordInput.invalid.required && passwordInput.touched">Please provide password.</div>
-            <div *ngIf="passwordInput.errors?.pattern && passwordInput.touched">Please provide password.</div>
-        
 
-            <input #repeatPasswordInput="ngModel" type="password" ngModel name="repeatPassword" placeholder ="Repeat password*" class="form-control">
-            <div *ngIf="repeatPasswordInput.errors?.required && repeatPasswordInput.touched">Please repeat password.</div>
-            <div *ngIf="passwordsGroup?.errors?.passwordMatch">Passwords don't match.</div>
-    
+
+
+
+
+
+
+<!-- <div class="text-center">
+<h1 class="text-primary">REGISTRATION</h1>
+<form novalidate [formGroup]="registerForm"  (ngSubmit)="register(registerForm.get('firstName').value, registerForm.get('lastName').value, registerForm.get('email').value, registerForm.get('username').value, registerForm.get('password').value, registerForm.get('repeatPassword').value)">
+    <div class="form-group">
+        <input class="form-control" formControlName="firstName" name="firstName" placeholder ="First name" >
+         <div *ngIf="registerForm.get('firstName').errors?.maxlength?.actualLength > registerForm.get('firstName').errors?.maxlength?.requiredLength  && registerForm.get('firstName').touched">
+            You can't enter more than {{registerForm.get('firstName').errors.maxlength.requiredLength}} characters for first name.</div>
+    </div> 
+    <div class="form-group">
+        <input class="form-control" formControlName="lastName" placeholder ="Last name"  >
+        <div  *ngIf="registerForm.get('lastName').errors?.maxlength?.actualLength > registerForm.get('lastName').errors?.maxlength?.requiredLength  && registerForm.get('lastName').touched">You can't enter more than {{registerForm.get('lastName').errors.maxlength.requiredLength}} characters for last name.</div>
+    </div> 
+    <div class="form-group" >
+        <input  class="form-control" formControlName="email" placeholder ="Email*" required email>
+        <div *ngIf="registerForm.get('email').errors?.required && registerForm.get('email').touched">Please provide an email.</div>
+        <div *ngIf="registerForm.get('email').errors?.email && registerForm.get('email').touched">Please provide a valid email.</div>
+    </div> 
+    <div class="form-group">
+        <input class="form-control" formControlName="username" placeholder ="Username*" required >
+        <div *ngIf="registerForm.get('username').errors?.required && registerForm.get('username').touched">Please provide username.</div>
+        <div *ngIf="registerForm.get('username').errors?.maxlength?.actualLength > registerForm.get('username').errors?.maxlength?.requiredLength 
+             && registerForm.get('username').touched">You can't enter more than {{registerForm.get('username').errors.maxlength.requiredLength}} characters for username.</div>
+    </div> 
+    <div class="form-group">
+        <div style="font-size: medium; color: gray;">*The password should have minimum 8 characters, one lowercase letter, one uppercase letter, one number, and one symbol, at least. </div>
+        <input class="form-control" type="password" formControlName="password" placeholder ="Password*" required>
+        <div  *ngIf="registerForm.get('password').errors?.required && registerForm.get('password').touched">Please provide password.</div>
+        <div  *ngIf="registerForm.get('password').errors?.pattern && registerForm.get('password').touched">Password is weak. {{registerForm.get('password').errors.pattern | json}}</div> 
     </div>
-    <button class="btn btn-primary" [disabled]="loginForm.invalid">REGISTER</button>
+    <div class="form-group">
+        <input class="form-control" type="password" formControlName="repeatPassword" placeholder ="Repeat password*" required >
+         <div *ngIf="registerForm.get('repeatPassword').errors?.required && registerForm.get('repeatPassword').touched">Please repeat password.</div>
+        <div  *ngIf="registerForm.errors?.passwordMatch">Passwords don't match. {{registerForm.errors?.passwordMatch}}</div> 
+    </div>
+    <button class="btn btn-primary" [disabled]="registerForm.invalid">REGISTER</button>
 </form>
-</div>
+</div> -->
+
+
+
 

@@ -2,6 +2,8 @@ import { Injectable, OnInit } from "@angular/core";
 import {IUser} from 'src/app/user/user';
 import {UsersDataSource} from './users.datasource';
 import {Observable} from 'rxjs';
+import {delay} from 'rxjs/operators';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 
 
 @Injectable({
@@ -9,8 +11,9 @@ import {Observable} from 'rxjs';
 })
 export class UserModel {
    
-   authenticated: boolean = false;
    currentUser: IUser = null;
+   displayedUser: IUser = null;
+
 
    constructor(private dataSource: UsersDataSource){
 
@@ -20,7 +23,7 @@ export class UserModel {
     return this.dataSource.loadUsers();
    }
 
-   getUserByUsername(username: string){
+   getUserByUsername(username: string): Observable<IUser>{
        return this.dataSource.loadUserByUsername(username);
    }
 
@@ -43,16 +46,7 @@ export class UserModel {
 
 
    logout(): Observable<IUser>{
-    return this.dataSource
-    .sendLoginRequest("",""); 
-   }
-
-   isAuthenticated(){
-       return this.authenticated;
-   }
-
-   setAuthenticated(isAuthenticated: boolean){
-       this.authenticated = isAuthenticated;
+    return this.dataSource.sendLogoutRequest("",""); 
    }
 
    getAuthenticatedUser(){
@@ -65,6 +59,10 @@ export class UserModel {
 
     createUser(firstName: string, lastName: string, email: string, username: string, password: string, repeatPassword:string ): Observable<IUser>{
        return this.dataSource.sendPostUserRequest(firstName,lastName,email,username,password,repeatPassword);
+    }
+
+    updateUser(username: string, firstName: string, lastName: string, email: string): Observable<IUser>{
+        return this.dataSource.sendUpdateUserRequest(username, firstName, lastName, email);
     }
 
 
